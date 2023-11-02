@@ -8,21 +8,10 @@ import {
 } from "react";
 import { createPortal } from "react-dom";
 import { useModalContext, ModalContext } from "../context/modal.context";
-import { cn } from "../utils/class";
+import { cn } from "@utils/class";
 import { Button } from "./Button";
 import { Close } from "./icons/Close";
-
-type ModalProps = {
-	children: ReactNode;
-	isOpen: boolean;
-	onClose: () => void;
-	className?: string;
-};
-
-type ChildrenProps = {
-	children: ReactNode;
-	className?: string;
-};
+import { ChildrenProps, ModalProps } from "@types";
 
 function Portal({ children }: { children: ReactNode }) {
 	return createPortal(children, document.body);
