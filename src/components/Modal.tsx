@@ -88,6 +88,14 @@ export function Modal({ children, isOpen, onClose, className }: ModalProps) {
 		return () => document.removeEventListener("keydown", keyListener);
 	}, [isOpen, keyListenersMap]);
 
+	useEffect(() => {
+		if (isOpen) {
+			document.body.style.overflow = "hidden";
+		} else {
+			document.body.style.overflow = "auto";
+		}
+	}, [isOpen]);
+
 	if (!isOpen) {
 		return null;
 	}

@@ -18,9 +18,9 @@ export default defineConfig({
 	build: {
 		lib: {
 			entry: path.resolve("src", "index.ts"),
-			name: "react-modal",
+			name: "react-simple-modal",
 			formats: ["es", "umd"],
-			fileName: (format) => `react-modal.${format}.js`,
+			fileName: (format) => `react-simple-modal.${format}.js`,
 		},
 		rollupOptions: {
 			external: [...Object.keys(packageJson), "react", "react-dom"],

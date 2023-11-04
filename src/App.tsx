@@ -9,7 +9,7 @@ export default function AppModal() {
 	const handleClose = () => setIsOpen(false);
 
 	return (
-		<div className="p-4">
+		<div className="p-4 h-[200vh]">
 			<Button onClick={handleOpen}>Ouvrir la modale</Button>
 
 			<Modal isOpen={isOpen} onClose={handleClose}>
@@ -28,7 +28,12 @@ export default function AppModal() {
 						Tenetur sint, est ea aliquid dignissimos vero quos!
 					</p>
 
-					<input type="text" name="" id="" className="border" />
+					<input type="text" className="border" placeholder="Email" />
+					<input
+						type="text"
+						className="border"
+						placeholder="Password"
+					/>
 
 					<Modal.Close>Fermer</Modal.Close>
 				</Modal.Content>
