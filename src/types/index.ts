@@ -1,14 +1,12 @@
-import { ComponentPropsWithRef, ReactNode } from "react";
+import { ComponentPropsWithRef, PropsWithChildren } from "react";
 
-export type ModalProps = {
-	children: ReactNode;
-	isOpen: boolean;
+export type ModalProps = PropsWithChildren & {
+	open: boolean;
 	onClose: () => void;
 	className?: string;
 };
 
-export type ChildrenProps = {
-	children: ReactNode;
+export type ChildrenProps = PropsWithChildren & {
 	className?: string;
 };
 

@@ -1,12 +1,7 @@
-import {
-	ReactNode,
-	forwardRef,
-	useCallback,
-	useEffect,
-	useMemo,
-	useRef,
-} from "react";
+import { ReactNode, forwardRef, useEffect, useMemo, useRef } from "react";
 import { createPortal } from "react-dom";
+import { useLockBodyScroll } from "@uidotdev/usehooks";
+import { FocusScope } from "react-aria";
 import { useModalContext, ModalContext } from "../context/modal.context";
 import { cn } from "@utils/class";
 import { Button } from "./Button";
@@ -27,104 +22,63 @@ function ModalOverlay({ className }: { className?: string }) {
 				className,
 			)}
 			onClick={onClose}
+			aria-hidden="true"
+			data-testid="overlay"
 		></div>
 	);
 }
 
-export function Modal({ children, isOpen, onClose, className }: ModalProps) {
+export function Modal({ children, open, onClose, className }: ModalProps) {
 	const modalRef = useRef<HTMLDivElement>(null);
 
-	const handleTabKey = useCallback(
-		(e: KeyboardEvent, elementsInModal: HTMLElement[]) => {
-			if (!modalRef.current) return;
-			e.preventDefault();
-
-			let index = elementsInModal.findIndex(
-				(el) => el === document.activeElement,
-			);
-
-			if (e.shiftKey) {
-				index--;
-			} else {
-				index++;
-			}
-
-			if (index >= elementsInModal.length) {
-				index = 0;
-			}
-			if (index < 0) {
-				index = elementsInModal.length - 1;
-			}
-
-			elementsInModal[index].focus();
-		},
-		[],
-	);
-
 	const keyListenersMap = useMemo(
-		() =>
-			new Map([
-				["Escape", onClose],
-				["Tab", handleTabKey],
-			]),
-		[onClose, handleTabKey],
+		() => new Map([["Escape", onClose]]),
+		[onClose],
 	);
 
 	useEffect(() => {
-		if (!isOpen || !modalRef.current) return;
-
-		const focusableModalElements = Array.from(
-			modalRef.current.querySelectorAll(
-				"a, button, textarea, input, select",
-			),
-		) as HTMLElement[];
+		if (!open || !modalRef.current) return;
 
 		function keyListener(e: KeyboardEvent) {
 			const listener = keyListenersMap.get(e.key);
-			return listener && listener(e, focusableModalElements);
+			return listener;
 		}
 		document.addEventListener("keydown", keyListener);
 
 		return () => document.removeEventListener("keydown", keyListener);
-	}, [isOpen, keyListenersMap]);
+	}, [open, keyListenersMap]);
 
-	useEffect(() => {
-		if (isOpen) {
-			document.body.style.overflow = "hidden";
-		} else {
-			document.body.style.overflow = "auto";
-		}
-	}, [isOpen]);
-
-	if (!isOpen) {
+	if (!open) {
 		return null;
 	}
 
 	return (
 		<Portal>
-			<ModalContext.Provider value={{ onClose }}>
-				<ModalOverlay />
+			<FocusScope contain restoreFocus>
+				<ModalContext.Provider value={{ onClose }}>
+					<ModalOverlay />
 
-				<div
-					role="dialog"
-					aria-modal="true"
-					className={cn(
-						"fixed left-[50%] top-[50%] z-50 grid w-full max-w-lg translate-x-[-50%] translate-y-[-50%] border bg-white text-slate-900 p-7 rounded-md",
-						className,
-					)}
-					ref={modalRef}
-				>
-					<button
-						autoFocus
-						onClick={onClose}
-						className="absolute right-4 top-4 p-1 focus:outline-2 focus:outline-black focus:outline-double"
+					<div
+						role="dialog"
+						aria-modal="true"
+						className={cn(
+							"fixed left-1/2 top-1/2 z-50 flex flex-col w-full max-w-lg -translate-x-1/2 -translate-y-1/2 border bg-white p-7 rounded-md",
+							className,
+						)}
+						ref={modalRef}
 					>
-						<Close />
-					</button>
+						<button
+							onClick={onClose}
+							className="place-self-end p-1 focus:outline-2 focus:outline-black focus:outline-double"
+							data-testid="close"
+						>
+							<Close />
+						</button>
 
-					{children}
-				</div>
-			</ModalContext.Provider>
+						{children}
+					</div>
+				</ModalContext.Provider>
+			</FocusScope>
 		</Portal>
 	);
 }
@@ -133,8 +87,10 @@ Modal.Content = forwardRef<HTMLDivElement, ChildrenProps>(function ModalContent(
 	{ children, className },
 	ref,
 ) {
+	useLockBodyScroll();
+
 	return (
-		<div ref={ref} className={cn("mt-3 flex flex-col gap-4", className)}>
+		<div ref={ref} className={cn("flex flex-col gap-4", className)}>
 			{children}
 		</div>
 	);
@@ -162,13 +118,7 @@ Modal.Title = forwardRef<HTMLHeadingElement, ChildrenProps>(function ModalTitle(
 	ref,
 ) {
 	return (
-		<h2
-			ref={ref}
-			className={cn(
-				"text-lg font-semibold leading-none tracking-tight",
-				className,
-			)}
-		>
+		<h2 ref={ref} className={cn("text-lg font-semibold", className)}>
 			{children}
 		</h2>
 	);

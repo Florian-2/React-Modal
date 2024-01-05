@@ -7,14 +7,14 @@ import path from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+	plugins: [react(), tsConfigPaths(), dts({ include: ["src/types"] })],
 	resolve: {
 		alias: {
-			"@utils": "/src/utils",
-			"@components": "/src/components",
-			"@types": "/src/types/index.ts",
+			"@utils": path.resolve(__dirname, "./src/utils"),
+			"@components": path.resolve(__dirname, "./src/components"),
+			"@types": path.resolve(__dirname, "./src/types/index.ts"),
 		},
 	},
-	plugins: [react(), tsConfigPaths(), dts({ include: ["src/types"] })],
 	build: {
 		lib: {
 			entry: path.resolve("src", "index.ts"),
