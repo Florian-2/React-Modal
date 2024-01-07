@@ -28,7 +28,7 @@ function ModalOverlay({ className }: { className?: string }) {
 	);
 }
 
-export function Modal({ children, open, onClose, className }: ModalProps) {
+function Modal({ children, open, onClose, className }: ModalProps) {
 	const modalRef = useRef<HTMLDivElement>(null);
 
 	const keyListenersMap = useMemo(
@@ -83,48 +83,48 @@ export function Modal({ children, open, onClose, className }: ModalProps) {
 	);
 }
 
-Modal.Content = forwardRef<HTMLDivElement, ChildrenProps>(function ModalContent(
-	{ children, className },
-	ref,
-) {
-	useLockBodyScroll();
+const ModalContent = forwardRef<HTMLDivElement, ChildrenProps>(
+	function ModalContent({ children, className }, ref) {
+		useLockBodyScroll();
 
-	return (
-		<div ref={ref} className={cn("flex flex-col gap-4", className)}>
-			{children}
-		</div>
-	);
-});
+		return (
+			<div ref={ref} className={cn("flex flex-col gap-4", className)}>
+				{children}
+			</div>
+		);
+	},
+);
+ModalContent.displayName = "ModalContent";
 
-Modal.Header = forwardRef<HTMLDivElement, ChildrenProps>(function ModalHeader(
-	{ children, className },
-	ref,
-) {
-	return (
-		<div
-			ref={ref}
-			className={cn(
-				"flex flex-col space-y-1.5 text-center sm:text-left",
-				className,
-			)}
-		>
-			{children}
-		</div>
-	);
-});
+const ModalHeader = forwardRef<HTMLDivElement, ChildrenProps>(
+	function ModalHeader({ children, className }, ref) {
+		return (
+			<div
+				ref={ref}
+				className={cn(
+					"flex flex-col space-y-1.5 text-center sm:text-left",
+					className,
+				)}
+			>
+				{children}
+			</div>
+		);
+	},
+);
+ModalHeader.displayName = "ModalHeader";
 
-Modal.Title = forwardRef<HTMLHeadingElement, ChildrenProps>(function ModalTitle(
-	{ children, className },
-	ref,
-) {
-	return (
-		<h2 ref={ref} className={cn("text-lg font-semibold", className)}>
-			{children}
-		</h2>
-	);
-});
+const ModalTitle = forwardRef<HTMLHeadingElement, ChildrenProps>(
+	function ModalTitle({ children, className }, ref) {
+		return (
+			<h2 ref={ref} className={cn("text-lg font-semibold", className)}>
+				{children}
+			</h2>
+		);
+	},
+);
+ModalTitle.displayName = "ModalTitle";
 
-Modal.Description = forwardRef<HTMLParagraphElement, ChildrenProps>(
+const ModalDescription = forwardRef<HTMLParagraphElement, ChildrenProps>(
 	function ModalDescription({ children, className }, ref) {
 		return (
 			<p ref={ref} className={cn("text-sm", className)}>
@@ -133,33 +133,44 @@ Modal.Description = forwardRef<HTMLParagraphElement, ChildrenProps>(
 		);
 	},
 );
+ModalDescription.displayName = "ModalDescription";
 
-Modal.Footer = forwardRef<HTMLDivElement, ChildrenProps>(function ModalFooter(
-	{ children, className },
-	ref,
-) {
-	return (
-		<div
-			ref={ref}
-			className={cn(
-				"flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2",
-				className,
-			)}
-		>
-			{children}
-		</div>
-	);
-});
+const ModalFooter = forwardRef<HTMLDivElement, ChildrenProps>(
+	function ModalFooter({ children, className }, ref) {
+		return (
+			<div
+				ref={ref}
+				className={cn(
+					"flex flex-col-reverse sm:flex-row sm:justify-end sm:space-x-2",
+					className,
+				)}
+			>
+				{children}
+			</div>
+		);
+	},
+);
+ModalFooter.displayName = "ModalFooter";
 
-Modal.Close = forwardRef<HTMLButtonElement, ChildrenProps>(function ModalClose(
-	{ children, className },
-	ref,
-) {
-	const { onClose } = useModalContext();
+const ModalClose = forwardRef<HTMLButtonElement, ChildrenProps>(
+	function ModalClose({ children, className }, ref) {
+		const { onClose } = useModalContext();
 
-	return (
-		<Button ref={ref} onClick={onClose} className={className}>
-			{children}
-		</Button>
-	);
-});
+		return (
+			<Button ref={ref} onClick={onClose} className={className}>
+				{children}
+			</Button>
+		);
+	},
+);
+ModalClose.displayName = "ModalClose";
+
+export {
+	Modal,
+	ModalClose,
+	ModalHeader,
+	ModalTitle,
+	ModalDescription,
+	ModalContent,
+	ModalFooter,
+};

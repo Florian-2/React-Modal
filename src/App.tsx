@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Button } from "@components/Button";
-import { Modal } from "@components/Modal";
+import { Modal, ModalContent, ModalClose } from "@components/Modal";
 
 export default function AppModal() {
 	const [isOpen, setIsOpen] = useState(false);
@@ -13,7 +13,7 @@ export default function AppModal() {
 			<Button onClick={handleOpen}>Ouvrir la modale</Button>
 
 			<Modal open={isOpen} onClose={handleClose}>
-				<Modal.Content>
+				<ModalContent>
 					<p className="text-sm">
 						Lorem ipsum dolor sit amet consectetur adipisicing elit.
 						Obcaecati voluptatem est, accusantium enim odit omnis
@@ -21,8 +21,8 @@ export default function AppModal() {
 						Tenetur sint, est ea aliquid dignissimos vero quos!
 					</p>
 
-					<Modal.Close>Fermer</Modal.Close>
-				</Modal.Content>
+					<ModalClose>Fermer</ModalClose>
+				</ModalContent>
 			</Modal>
 		</div>
 	);
