@@ -67,7 +67,10 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/Florian-2/react-modal"
+		"url": "https://github.com/Florian-2/react-simple-modal"
+	},
+	"publishConfig": {
+		"access": "public"
 	},
 	"keywords": [
 		"react",
