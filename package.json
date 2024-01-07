@@ -1,5 +1,5 @@
 {
-	"name": "@florian21/react-simple-modal",
+	"name": "react-simple-modal",
 	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
@@ -80,6 +80,6 @@
 		"dialog"
 	],
 	"author": "Florian",
-	"homepage": "https://github.com/Florian-2/react-modal#readme",
+	"homepage": "https://github.com/Florian-2/react-simple-modal#readme",
 	"license": "MIT"
 }
