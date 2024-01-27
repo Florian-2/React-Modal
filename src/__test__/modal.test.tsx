@@ -1,5 +1,5 @@
-import { fireEvent, render } from "@testing-library/react";
 import "@testing-library/jest-dom";
+import { fireEvent, render } from "@testing-library/react";
 import { Modal } from "@components/Modal";
 
 describe("When the modal is open", () => {
@@ -53,6 +53,31 @@ describe("When the modal is open", () => {
 		);
 
 		expect(onClose).toHaveBeenCalledTimes(1);
+		expect(queryByRole("dialog")).not.toBeInTheDocument();
+	});
+
+	test("Then the modal should close when I press the Esc key", () => {
+		const onClose = jest.fn();
+		render(
+			<Modal open onClose={onClose}>
+				<p>Lorem</p>
+			</Modal>,
+		);
+
+		fireEvent.keyDown(document, { key: "Escape", code: "Escape" });
+
+		expect(onClose).toHaveBeenCalledTimes(1);
+	});
+});
+
+describe("When the modal is close", () => {
+	test("Then the contents of the modal should be invisible", () => {
+		const { queryByRole } = render(
+			<Modal open={false} onClose={() => null}>
+				<p>Invisible</p>
+			</Modal>,
+		);
+
 		expect(queryByRole("dialog")).not.toBeInTheDocument();
 	});
 });

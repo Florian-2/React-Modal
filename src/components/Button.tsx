@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
-import { cn } from "../utils/class";
+import { cn } from "../utils/twMerge";
 import { ButtonProps } from "@types";
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(

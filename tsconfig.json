@@ -27,9 +27,9 @@
 			"@utils/*": ["./utils/*"],
 			"@components/*": ["./components/*"],
 			"@types": ["./types/index.ts"],
-			"react-modal": ["src/components/index.ts"]
+			"react-modal": ["./index.ts"]
 		}
 	},
-	"include": ["src"],
+	"include": ["src", "cypress", "cypress-real-events"],
 	"references": [{ "path": "./tsconfig.node.json" }]
 }

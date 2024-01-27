@@ -3,7 +3,7 @@ import { createPortal } from "react-dom";
 import { useLockBodyScroll } from "@uidotdev/usehooks";
 import { FocusScope } from "react-aria";
 import { useModalContext, ModalContext } from "../context/modal.context";
-import { cn } from "@utils/class";
+import { cn } from "@utils/twMerge";
 import { Button } from "./Button";
 import { Close } from "./icons/Close";
 import { ChildrenProps, ModalProps } from "@types";
@@ -41,7 +41,7 @@ function Modal({ children, open, onClose, className }: ModalProps) {
 
 		function keyListener(e: KeyboardEvent) {
 			const listener = keyListenersMap.get(e.key);
-			return listener;
+			listener && listener();
 		}
 		document.addEventListener("keydown", keyListener);
 
@@ -54,13 +54,14 @@ function Modal({ children, open, onClose, className }: ModalProps) {
 
 	return (
 		<Portal>
-			<FocusScope contain restoreFocus>
+			<FocusScope contain autoFocus restoreFocus>
 				<ModalContext.Provider value={{ onClose }}>
 					<ModalOverlay />
 
 					<div
 						role="dialog"
 						aria-modal="true"
+						data-cy="modal"
 						className={cn(
 							"fixed left-1/2 top-1/2 z-50 flex flex-col w-full max-w-lg -translate-x-1/2 -translate-y-1/2 border bg-white p-7 rounded-md",
 							className,

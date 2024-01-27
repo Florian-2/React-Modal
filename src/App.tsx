@@ -11,6 +11,7 @@ export default function AppModal() {
 	return (
 		<div className="p-4 h-[200vh]">
 			<Button onClick={handleOpen}>Ouvrir la modale</Button>
+			<input type="text" name="" id="" />
 
 			<Modal open={isOpen} onClose={handleClose}>
 				<ModalContent>
@@ -20,6 +21,13 @@ export default function AppModal() {
 						eos provident libero distinctio commodi nisi deserunt?
 						Tenetur sint, est ea aliquid dignissimos vero quos!
 					</p>
+
+					<input type="text" className="border" placeholder="Email" />
+					<input
+						type="text"
+						className="border"
+						placeholder="Mot de passe"
+					/>
 
 					<ModalClose>Fermer</ModalClose>
 				</ModalContent>
