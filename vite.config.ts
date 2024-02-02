@@ -23,8 +23,9 @@ export default defineConfig({
 		lib: {
 			entry: path.resolve("src", "components/index.ts"),
 			name: "react-simple-modal",
-			formats: ["es", "umd"],
-			fileName: (format) => `react-simple-modal.${format}.js`,
+			// formats: ["es", "umd"],
+			// fileName: (format) => `react-simple-modal.${format}.js`,
+			fileName: "index",
 		},
 		rollupOptions: {
 			external: [
