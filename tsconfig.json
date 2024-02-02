@@ -27,9 +27,8 @@
 			"@utils/*": ["./utils/*"],
 			"@components/*": ["./components/*"],
 			"@types": ["./types/index.ts"],
-			"react-modal": ["./index.ts"]
+			"react-modal": ["src/components/index.ts"]
 		}
-		// "types": ["@testing-library/jest-dom"]
 	},
 	"include": ["src", "cypress", "cypress-real-events"],
 	"exclude": ["cypress.config.ts"],

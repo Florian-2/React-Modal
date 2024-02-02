@@ -10,7 +10,7 @@ export default defineConfig({
 	plugins: [
 		react(),
 		tsConfigPaths(),
-		dts({ exclude: ["cypress", "src/main.tsx", "__test__", "src/App"] }),
+		dts({ include: ["src/components/", "src/types"] }),
 	],
 	resolve: {
 		alias: {
@@ -21,18 +21,22 @@ export default defineConfig({
 	},
 	build: {
 		lib: {
-			entry: path.resolve("src", "index.ts"),
+			entry: path.resolve("src", "components/index.ts"),
 			name: "react-simple-modal",
-			// formats: ["es", "umd"],
-			// fileName: (format) => `react-simple-modal.${format}.js`,
-			fileName: "index",
+			formats: ["es", "umd"],
+			fileName: (format) => `react-simple-modal.${format}.js`,
 		},
 		rollupOptions: {
-			external: [...Object.keys(packageJson), "react", "react-dom"],
+			external: [
+				...Object.keys(packageJson.peerDependencies),
+				"react",
+				"react-dom",
+			],
 			output: {
 				globals: {
 					react: "react",
 					"react-dom": "ReactDOM",
+					// "react/jsx-runtime": "react/jsx-runtime",
 				},
 			},
 		},
