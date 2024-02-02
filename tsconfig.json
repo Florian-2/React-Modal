@@ -29,7 +29,9 @@
 			"@types": ["./types/index.ts"],
 			"react-modal": ["./index.ts"]
 		}
+		// "types": ["@testing-library/jest-dom"]
 	},
 	"include": ["src", "cypress", "cypress-real-events"],
+	"exclude": ["cypress.config.ts"],
 	"references": [{ "path": "./tsconfig.node.json" }]
 }

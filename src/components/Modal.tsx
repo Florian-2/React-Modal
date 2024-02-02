@@ -1,12 +1,12 @@
 import { ReactNode, forwardRef, useEffect, useMemo, useRef } from "react";
 import { createPortal } from "react-dom";
-import { useLockBodyScroll } from "@uidotdev/usehooks";
 import { FocusScope } from "react-aria";
 import { useModalContext, ModalContext } from "../context/modal.context";
 import { cn } from "@utils/twMerge";
 import { Button } from "./Button";
 import { Close } from "./icons/Close";
 import { ChildrenProps, ModalProps } from "@types";
+import { useLockBodyScroll } from "hooks/useLockBodyScroll";
 
 function Portal({ children }: { children: ReactNode }) {
 	return createPortal(children, document.body);

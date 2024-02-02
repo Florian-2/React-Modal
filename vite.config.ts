@@ -7,7 +7,11 @@ import path from "path";
 
 // https://vitejs.dev/config/
 export default defineConfig({
-	plugins: [react(), tsConfigPaths(), dts({ include: ["src/types"] })],
+	plugins: [
+		react(),
+		tsConfigPaths(),
+		dts({ exclude: ["cypress", "src/main.tsx", "__test__", "src/App"] }),
+	],
 	resolve: {
 		alias: {
 			"@utils": path.resolve(__dirname, "./src/utils"),
@@ -19,8 +23,9 @@ export default defineConfig({
 		lib: {
 			entry: path.resolve("src", "index.ts"),
 			name: "react-simple-modal",
-			formats: ["es", "umd"],
-			fileName: (format) => `react-simple-modal.${format}.js`,
+			// formats: ["es", "umd"],
+			// fileName: (format) => `react-simple-modal.${format}.js`,
+			fileName: "index",
 		},
 		rollupOptions: {
 			external: [...Object.keys(packageJson), "react", "react-dom"],
