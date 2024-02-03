@@ -1,6 +1,6 @@
 {
 	"name": "@florian_/react-simple-modal",
-	"version": "0.0.5",
+	"version": "1.0.0",
 	"type": "module",
 	"scripts": {
 		"dev": "vite",
