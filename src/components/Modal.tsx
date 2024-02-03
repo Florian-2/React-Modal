@@ -7,7 +7,6 @@ import { Button } from "./Button";
 import { Close } from "./icons/Close";
 import { ChildrenProps, ModalProps } from "@types";
 import { useLockBodyScroll } from "hooks/useLockBodyScroll";
-// import "../style.css";
 
 function Portal({ children }: { children: ReactNode }) {
 	return createPortal(children, document.body);
@@ -64,7 +63,7 @@ function Modal({ children, open, onClose, className }: ModalProps) {
 						aria-modal="true"
 						data-cy="modal"
 						className={cn(
-							"fixed left-1/2 top-1/2 z-50 flex flex-col w-full max-w-lg -translate-x-1/2 -translate-y-1/2 border bg-red-500 p-7 rounded-md",
+							"fixed left-1/2 top-1/2 z-50 flex flex-col w-full max-w-lg -translate-x-1/2 -translate-y-1/2 border bg-white p-7 rounded-md",
 							className,
 						)}
 						ref={modalRef}
