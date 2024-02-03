@@ -10,7 +10,7 @@ export default defineConfig({
 	plugins: [
 		react(),
 		tsConfigPaths(),
-		dts({ include: ["src/components/", "src/types"] }),
+		dts({ include: ["src/components/", "src/types", "src/index.ts"] }),
 	],
 	resolve: {
 		alias: {
@@ -21,10 +21,9 @@ export default defineConfig({
 	},
 	build: {
 		lib: {
-			entry: path.resolve("src", "components/index.ts"),
+			entry: path.resolve("src", "index.ts"),
 			name: "react-simple-modal",
-			// formats: ["es", "umd"],
-			// fileName: (format) => `react-simple-modal.${format}.js`,
+			formats: ["es"],
 			fileName: "index",
 		},
 		rollupOptions: {
@@ -37,8 +36,8 @@ export default defineConfig({
 				globals: {
 					react: "react",
 					"react-dom": "ReactDOM",
-					// "react/jsx-runtime": "react/jsx-runtime",
 				},
+				intro: 'import "./style.css";',
 			},
 		},
 	},

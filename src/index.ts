@@ -10,4 +10,4 @@ export {
 	ModalHeader,
 	ModalTitle,
 } from "@components/Modal";
-import "./index.css";
+import "./style.css";

@@ -7,6 +7,7 @@ import { Button } from "./Button";
 import { Close } from "./icons/Close";
 import { ChildrenProps, ModalProps } from "@types";
 import { useLockBodyScroll } from "hooks/useLockBodyScroll";
+// import "../style.css";
 
 function Portal({ children }: { children: ReactNode }) {
 	return createPortal(children, document.body);
