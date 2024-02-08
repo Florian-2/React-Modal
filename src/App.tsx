@@ -5,15 +5,18 @@ import { Modal, ModalContent, ModalClose } from "@components/Modal";
 export default function AppModal() {
 	const [isOpen, setIsOpen] = useState(false);
 
-	const handleOpen = () => setIsOpen(true);
-	const handleClose = () => setIsOpen(false);
+	const handleModal = () => setIsOpen((prev) => !prev);
 
 	return (
-		<div className="p-4 h-[200vh]">
-			<Button onClick={handleOpen}>Ouvrir la modale</Button>
+		<>
+			<Button onClick={handleModal}>Ouvrir la modale</Button>
 			<input type="text" name="" id="" />
 
-			<Modal open={isOpen} onClose={handleClose}>
+			<Modal
+				open={isOpen}
+				onClose={handleModal}
+				onOpenChange={(isOpen) => console.log(isOpen)}
+			>
 				<ModalContent>
 					<p className="text-sm">
 						Lorem ipsum dolor sit amet consectetur adipisicing elit.
@@ -32,6 +35,6 @@ export default function AppModal() {
 					<ModalClose>Fermer</ModalClose>
 				</ModalContent>
 			</Modal>
-		</div>
+		</>
 	);
 }

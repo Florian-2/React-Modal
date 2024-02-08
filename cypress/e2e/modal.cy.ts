@@ -35,5 +35,9 @@ describe("Closing Modal", () => {
 		modal.should("not.exist");
 	});
 
-	// test Esc
+	it("should close after pressing the Escape key", () => {
+		const modal = cy.get(MODAL_SELECTOR);
+		modal.realPress("Escape");
+		modal.should("not.exist");
+	});
 });

@@ -6,7 +6,7 @@ import { cn } from "@utils/twMerge";
 import { Button } from "./Button";
 import { Close } from "./icons/Close";
 import { ChildrenProps, ModalProps } from "@types";
-import { useLockBodyScroll } from "hooks/useLockBodyScroll";
+import { useLockBodyScroll } from "../hooks/useLockBodyScroll";
 
 function Portal({ children }: { children: ReactNode }) {
 	return createPortal(children, document.body);
@@ -28,7 +28,16 @@ function ModalOverlay({ className }: { className?: string }) {
 	);
 }
 
-function Modal({ children, open, onClose, className }: ModalProps) {
+function Modal({
+	children,
+	open,
+	autoFocus = true,
+	restoreFocus = true,
+	onClose,
+	onCreate,
+	onOpenChange,
+	className,
+}: ModalProps) {
 	const modalRef = useRef<HTMLDivElement>(null);
 
 	const keyListenersMap = useMemo(
@@ -45,8 +54,18 @@ function Modal({ children, open, onClose, className }: ModalProps) {
 		}
 		document.addEventListener("keydown", keyListener);
 
+		if (onCreate) {
+			onCreate();
+		}
+
 		return () => document.removeEventListener("keydown", keyListener);
 	}, [open, keyListenersMap]);
+
+	useEffect(() => {
+		if (onOpenChange) {
+			onOpenChange(open);
+		}
+	}, [open]);
 
 	if (!open) {
 		return null;
@@ -54,7 +73,11 @@ function Modal({ children, open, onClose, className }: ModalProps) {
 
 	return (
 		<Portal>
-			<FocusScope contain autoFocus restoreFocus>
+			<FocusScope
+				contain
+				autoFocus={autoFocus}
+				restoreFocus={restoreFocus}
+			>
 				<ModalContext.Provider value={{ onClose }}>
 					<ModalOverlay />
 
@@ -72,6 +95,7 @@ function Modal({ children, open, onClose, className }: ModalProps) {
 							onClick={onClose}
 							className="place-self-end p-1 focus:outline-2 focus:outline-black focus:outline-double"
 							data-testid="close"
+							tabIndex={-1}
 						>
 							<Close />
 						</button>

@@ -14,6 +14,28 @@ describe("When the modal is open", () => {
 		expect(getByText(/lorem/i)).toBeInTheDocument();
 	});
 
+	test("Then the callback function pass to onOpenChange should be called", () => {
+		const handleOpenChange = jest.fn();
+		render(
+			<Modal open onClose={() => null} onOpenChange={handleOpenChange}>
+				<p>Lorem</p>
+			</Modal>,
+		);
+
+		expect(handleOpenChange).toHaveBeenCalledTimes(1);
+	});
+
+	test("Then the callback function pass to onCreate should be called", () => {
+		const handleCreate = jest.fn();
+		render(
+			<Modal open onClose={() => null} onCreate={handleCreate}>
+				<p>created</p>
+			</Modal>,
+		);
+
+		expect(handleCreate).toHaveBeenCalledTimes(1);
+	});
+
 	test("Then the modal should close when I click on the cross", () => {
 		const onClose = jest.fn();
 		const { getByTestId, queryByRole, rerender } = render(
