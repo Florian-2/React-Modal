@@ -57,8 +57,8 @@ export function Example() {
 | ------------ | -------- | --------- | --------------------------------- | ---------------------- |
 | open         | yes      | -         | boolean                           | [Click](#open)         |
 | onClose      | yes      | -         | function => void                  | [Click](#onclose)      |
-| onOpenChange | no       | -         | function(isOpen: boolean) => void | [Click](#onopenChange) |
-| onCreate     | no       | -         | function => void                  | [Click](#oncreate)     |
+| onOpenChange | no       | undefined | function(isOpen: boolean) => void | [Click](#onopenChange) |
+| onCreate     | no       | undefined | function => void                  | [Click](#oncreate)     |
 | autoFocus    | no       | true      | boolean                           | [Click](#autofocus)    |
 | restoreFocus | no       | true      | boolean                           | [Click](#restorefocus) |
 | className    | no       | undefined | string                            |                        |
