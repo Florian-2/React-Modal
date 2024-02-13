@@ -1,4 +1,11 @@
-import { ReactNode, forwardRef, useEffect, useMemo, useRef } from "react";
+import {
+	ReactNode,
+	ReactPortal,
+	forwardRef,
+	useEffect,
+	useMemo,
+	useRef,
+} from "react";
 import { createPortal } from "react-dom";
 import { FocusScope } from "react-aria";
 import { useModalContext, ModalContext } from "../context/modal.context";
@@ -8,10 +15,17 @@ import { Close } from "./icons/Close";
 import { ChildrenProps, ModalProps } from "@types";
 import { useLockBodyScroll } from "../hooks/useLockBodyScroll";
 
-function Portal({ children }: { children: ReactNode }) {
+/**
+ * Creates a portal to render children into a different part of the DOM.
+ */
+function Portal({ children }: { children: ReactNode }): ReactPortal {
 	return createPortal(children, document.body);
 }
 
+/**
+ * A clickable background for the modal.
+ * @param {ModalOverlayProps} props - The props for the ModalOverlay component.
+ */
 function ModalOverlay({ className }: { className?: string }) {
 	const { onClose } = useModalContext();
 
@@ -28,6 +42,9 @@ function ModalOverlay({ className }: { className?: string }) {
 	);
 }
 
+/**
+ * A modal component.
+ */
 function Modal({
 	children,
 	open,
@@ -40,10 +57,8 @@ function Modal({
 }: ModalProps) {
 	const modalRef = useRef<HTMLDivElement>(null);
 
-	const keyListenersMap = useMemo(
-		() => new Map([["Escape", onClose]]),
-		[onClose],
-	);
+	// A Map containing the trigger event types and their handlers
+	const keyListenersMap = useMemo(() => new Map([["Escape", onClose]]), []);
 
 	useEffect(() => {
 		if (!open || !modalRef.current) return;
@@ -108,6 +123,9 @@ function Modal({
 	);
 }
 
+/**
+ * A forward-ref component to wrap modal content.
+ */
 const ModalContent = forwardRef<HTMLDivElement, ChildrenProps>(
 	function ModalContent({ children, className }, ref) {
 		useLockBodyScroll();
@@ -121,6 +139,9 @@ const ModalContent = forwardRef<HTMLDivElement, ChildrenProps>(
 );
 ModalContent.displayName = "ModalContent";
 
+/**
+ * A forward-ref component that can contain the title and description of the modal window.
+ */
 const ModalHeader = forwardRef<HTMLDivElement, ChildrenProps>(
 	function ModalHeader({ children, className }, ref) {
 		return (
@@ -138,6 +159,9 @@ const ModalHeader = forwardRef<HTMLDivElement, ChildrenProps>(
 );
 ModalHeader.displayName = "ModalHeader";
 
+/**
+ * A forward-ref component that returns an h2, this component must be used in the <ModalHeader> for better semantics.
+ */
 const ModalTitle = forwardRef<HTMLHeadingElement, ChildrenProps>(
 	function ModalTitle({ children, className }, ref) {
 		return (
@@ -149,10 +173,14 @@ const ModalTitle = forwardRef<HTMLHeadingElement, ChildrenProps>(
 );
 ModalTitle.displayName = "ModalTitle";
 
+/**
+ * A forward-ref component that returns a paragraph giving details of the modal's content.
+ * This component should be used in the <ModalHeader> for better semantics.
+ */
 const ModalDescription = forwardRef<HTMLParagraphElement, ChildrenProps>(
 	function ModalDescription({ children, className }, ref) {
 		return (
-			<p ref={ref} className={cn("text-sm", className)}>
+			<p ref={ref} className={cn("text-sm text-neutral-600", className)}>
 				{children}
 			</p>
 		);
@@ -160,6 +188,9 @@ const ModalDescription = forwardRef<HTMLParagraphElement, ChildrenProps>(
 );
 ModalDescription.displayName = "ModalDescription";
 
+/**
+ * A forward-ref component to wrap modal content.
+ */
 const ModalFooter = forwardRef<HTMLDivElement, ChildrenProps>(
 	function ModalFooter({ children, className }, ref) {
 		return (
@@ -177,6 +208,9 @@ const ModalFooter = forwardRef<HTMLDivElement, ChildrenProps>(
 );
 ModalFooter.displayName = "ModalFooter";
 
+/**
+ * A forward-ref component returns a button that can trigger the closure of the modal.
+ */
 const ModalClose = forwardRef<HTMLButtonElement, ChildrenProps>(
 	function ModalClose({ children, className }, ref) {
 		const { onClose } = useModalContext();

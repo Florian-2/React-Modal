@@ -1,4 +1,4 @@
-# React Modal
+# React Simple Modal
 
 -   [Installation](#installation)
 -   [Usage/Examples](#usageexamples)
@@ -22,7 +22,13 @@ pnpm add @florian_/react-simple-modal
 ## Usage/Examples
 
 ```js
-import Modal from "@florian_/react-simple-modal";
+import {
+	Modal,
+	ModalContent,
+	ModalContent,
+	ModalClose,
+	ModalFooter,
+} from "@florian_/react-simple-modal";
 
 export function Example() {
 	const [isOpen, setIsOpen] = useState(false);
@@ -35,15 +41,33 @@ export function Example() {
 
 			<Modal open={isOpen} onClose={handleModal}>
 				<ModalContent>
-					<p>
-						Lorem ipsum dolor sit amet consectetur adipisicing elit.
-						Obcaecati voluptatem est, accusantium enim odit omnis
-						eos provident libero distinctio commodi nisi deserunt?
-					</p>
+					<ModalHeader>
+						<ModalTitle>Login</ModalTitle>
+						<ModalDescription>
+							Lorem ipsum dolor sit amet consectetur adipisicing
+							elit.
+						</ModalDescription>
+					</ModalHeader>
 
-					<input type="text" className="border" placeholder="Email" />
+					<form>
+						<div>
+							<label htmlFor="email">Email</label>
+							<input type="text" placeholder="email" id="email" />
+						</div>
 
-					<ModalClose>close</ModalClose>
+						<div>
+							<label htmlFor="password">Password</label>
+							<input
+								type="password"
+								placeholder="password"
+								id="password"
+							/>
+						</div>
+					</form>
+
+					<ModalFooter>
+						<ModalClose>Close</ModalClose>
+					</ModalFooter>
 				</ModalContent>
 			</Modal>
 		</>
@@ -78,7 +102,7 @@ export function Example() {
 `autoFocus` focus the first focusable element in the modal.
 
 ```js
-<Modal open={true} autoFocus>
+<Modal open autoFocus>
 	...
 </Modal>
 ```
@@ -88,7 +112,7 @@ export function Example() {
 `restoreFocus` restores focus on base element after closing modal.
 
 ```js
-<Modal open={true} restoreFocus>
+<Modal open restoreFocus>
 	...
 </Modal>
 ```
