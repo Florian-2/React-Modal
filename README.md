@@ -25,10 +25,12 @@ pnpm add @florian_/react-simple-modal
 import {
 	Modal,
 	ModalContent,
-	ModalContent,
 	ModalClose,
+	ModalTitle,
+	ModalHeader,
+	ModalDescription,
 	ModalFooter,
-} from "@florian_/react-simple-modal";
+} from "@components/Modal";
 
 export function Example() {
 	const [isOpen, setIsOpen] = useState(false);
@@ -49,21 +51,12 @@ export function Example() {
 						</ModalDescription>
 					</ModalHeader>
 
-					<form>
-						<div>
-							<label htmlFor="email">Email</label>
-							<input type="text" placeholder="email" id="email" />
-						</div>
-
-						<div>
-							<label htmlFor="password">Password</label>
-							<input
-								type="password"
-								placeholder="password"
-								id="password"
-							/>
-						</div>
-					</form>
+					<p>
+						Lorem ipsum dolor sit amet consectetur, adipisicing
+						elit. Quaerat explicabo dolor repellendus sed esse
+						voluptatum velit. Voluptate at veniam corrupti nihil a
+						aliquam omnis magnam, vitae aut expedita, earum illo!
+					</p>
 
 					<ModalFooter>
 						<ModalClose>Close</ModalClose>

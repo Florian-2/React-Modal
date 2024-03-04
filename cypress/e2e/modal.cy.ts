@@ -1,5 +1,4 @@
 const MODAL_SELECTOR = "[data-cy='modal']";
-// const FOCUSABLE = "a[href], input, button, textarea, select";
 
 describe("Opening modal", () => {
 	beforeEach(() => {
