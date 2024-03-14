@@ -25,12 +25,12 @@ pnpm add @florian_/react-simple-modal
 import {
 	Modal,
 	ModalContent,
-	ModalClose,
-	ModalTitle,
 	ModalHeader,
+	ModalTitle,
 	ModalDescription,
+	ModalClose,
 	ModalFooter,
-} from "@components/Modal";
+} from "@florian_/react-simple-modal";
 
 export function Example() {
 	const [isOpen, setIsOpen] = useState(false);
