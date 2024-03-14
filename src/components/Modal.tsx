@@ -165,7 +165,7 @@ ModalHeader.displayName = "ModalHeader";
 const ModalTitle = forwardRef<HTMLHeadingElement, ChildrenProps>(
 	function ModalTitle({ children, className }, ref) {
 		return (
-			<h2 ref={ref} className={cn("text-lg font-semibold", className)}>
+			<h2 ref={ref} className={cn("text-xl font-semibold", className)}>
 				{children}
 			</h2>
 		);

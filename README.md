@@ -1,11 +1,62 @@
 # React Simple Modal
 
--   [Installation](#installation)
--   [Usage/Examples](#usageexamples)
--   [Props](#props)
-    -   [Examples](#props-examples)
+<details>
+  <summary>Table of Contents</summary>
+  <ol>
+    <li>
+      <a href="#about-the-project">About The Project</a>
+      <ul>
+        <li><a href="#built-with">Built With</a></li>
+      </ul>
+    </li>
+    <li>
+      <a href="#getting-started">Getting Started</a>
+      <ul>
+        <li><a href="#prerequisites">Prerequisites</a></li>
+        <li><a href="#installation">Installation</a></li>
+      </ul>
+    </li>
+    <li><a href="#usage-examples">Usage</a></li>
+    <li>
+      <a href="#props">Props</a>
+      <ul>
+        <li><a href="#props-examples">Props Examples</a></li>
+      </ul>
+    </li>
+  </ol>
+</details>
 
-## Installation
+## About the project
+
+This Modal component was initially created to meet a specific need in a personal project. However, aware of the value of component reusability, I designed it with the intention of making it adaptable and easily integrated into other projects.
+
+<img src="/image.png" />
+
+### Built with
+
+[![React 18](https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=white)](https://reactjs.org/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)](https://tailwindcss.com/)
+[![Vite.js](https://img.shields.io/badge/Vite.js-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
+
+## Getting Started
+
+### Prerequisites
+
+You need a <b>package manager</b> and <b>React 17 or later</b>.
+
+-   npm
+
+    ```bash
+    npm install npm@latest -g
+    ```
+
+-   pnpm
+    ```bash
+    npm install -g pnpm
+    ```
+    Please refer to this [documentation](https://pnpm.io/installation) for more information.
+
+### Installation
 
 npm
 
@@ -19,7 +70,9 @@ pnpm
 pnpm add @florian_/react-simple-modal
 ```
 
-## Usage/Examples
+## Usage / Examples
+
+The Modal component simply needs a state to indicate whether the modal window should be displayed or not, and a function to manage its closure.
 
 ```js
 import {
@@ -32,14 +85,14 @@ import {
 	ModalFooter,
 } from "@florian_/react-simple-modal";
 
-export function Example() {
+function App() {
 	const [isOpen, setIsOpen] = useState(false);
 
 	const handleModal = () => setIsOpen(!isOpen);
 
 	return (
 		<>
-			<Button onClick={handleModal}>open</Button>
+			<button onClick={handleModal}>open</button>
 
 			<Modal open={isOpen} onClose={handleModal}>
 				<ModalContent>
@@ -66,6 +119,8 @@ export function Example() {
 		</>
 	);
 }
+
+export default App;
 ```
 
 ## Props

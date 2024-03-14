@@ -25,36 +25,23 @@ export default function AppModal() {
 				placeholder="input"
 			/>
 
-			<Modal open={isOpen} onClose={handleModal}>
+			<Modal open={isOpen} onClose={handleModal} autoFocus={false}>
 				<ModalContent>
 					<ModalHeader>
-						<ModalTitle>Titre</ModalTitle>
+						<ModalTitle>Title</ModalTitle>
 						<ModalDescription>
 							Lorem ipsum dolor sit amet consectetur adipisicing
 							elit.
 						</ModalDescription>
 					</ModalHeader>
 
-					<form className="space-y-2">
-						<div>
-							<label htmlFor="email">Email</label>
-							<input type="text" placeholder="email" id="email" />
-						</div>
-
-						<div>
-							<label htmlFor="password">Password</label>
-							<input
-								type="password"
-								placeholder="password"
-								id="password"
-							/>
-						</div>
-					</form>
-
-					<ModalFooter>
-						<Button>Valider</Button>
-						<ModalClose>Fermer</ModalClose>
-					</ModalFooter>
+					<p>
+						Lorem, ipsum dolor sit amet consectetur adipisicing
+						elit. Quas eum sapiente repellendus libero labore
+						expedita, distinctio laborum quam esse illo nam tempore
+						natus tenetur quasi quos, laudantium consequatur veniam
+						cum?
+					</p>
 				</ModalContent>
 			</Modal>
 		</div>
